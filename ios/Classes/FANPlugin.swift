@@ -3,7 +3,7 @@ import UIKit
 
 public class FANPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
-        print(">> FAN Plugin register")
+//        print(">> FAN Plugin register")
 
         registrar.register(
             FacebookAudienceNetworkBannerAdFactory(_registrar: registrar),

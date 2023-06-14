@@ -14,7 +14,7 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     var rewardedAd: FBRewardedVideoAd!
     
     init(_channel: FlutterMethodChannel) {
-        print("FacebookAudienceNetworkRewardedAdPlugin > init")
+//        print("FacebookAudienceNetworkRewardedAdPlugin > init")
         
         channel = _channel
         
@@ -23,26 +23,26 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
         channel.setMethodCallHandler { (call, result) in
             switch call.method{
             case "loadRewardedAd":
-                print("FacebookAudienceNetworkInterstitialAdPlugin > loadInterstitialAd")
+//                print("FacebookAudienceNetworkInterstitialAdPlugin > loadInterstitialAd")
                 result(self.loadAd(call))
             case "showRewardedAd":
-                print("FacebookAudienceNetworkInterstitialAdPlugin > showInterstitialAd")
+//                print("FacebookAudienceNetworkInterstitialAdPlugin > showInterstitialAd")
                 result(self.showAD(call))
             case "destroyRewardedAd":
-                print("FacebookAudienceNetworkInterstitialAdPlugin > destroyInterstitialAd")
+//                print("FacebookAudienceNetworkInterstitialAdPlugin > destroyInterstitialAd")
                 result(self.destroyAd())
             default:
                 result(FlutterMethodNotImplemented)
             }
         }
         
-        print("FacebookAudienceNetworkRewardedAdPlugin > init > end")
+//        print("FacebookAudienceNetworkRewardedAdPlugin > init > end")
     }
     
     
     func loadAd(_ call: FlutterMethodCall) -> Bool {
         if nil == self.rewardedAd || !self.rewardedAd.isAdValid {
-            print("FacebookAudienceNetworkRewardedAdPlugin > loadAd > create")
+//            print("FacebookAudienceNetworkRewardedAdPlugin > loadAd > create")
             let args: NSDictionary = call.arguments as! NSDictionary
             let id: String = args["id"] as! String
             self.rewardedAd = FBRewardedVideoAd.init(placementID: id)
@@ -54,7 +54,7 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     
     func showAD(_ call: FlutterMethodCall) -> Bool {
         if !self.rewardedAd.isAdValid {
-            print("FacebookAudienceNetworkRewardedAdPlugin > showAD > not AdVaild")
+//            print("FacebookAudienceNetworkRewardedAdPlugin > showAD > not AdVaild")
             return false
         }
         let args: NSDictionary = call.arguments as! NSDictionary
@@ -63,7 +63,7 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
         //MARK:- Need to remove because it' already called with delay.
         //self.interstitialAd.show(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController)
         
-        print("@@@ delay %d", delay)
+//        print("@@@ delay %d", delay)
         
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
             return false
@@ -96,7 +96,7 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     }
     
     func rewardedVideoAdVideoComplete(_ rewardedVideoAd: FBRewardedVideoAd) {
-        print("RewardedVideoAdView > rewardedVideoAdVideoComplete")
+//        print("RewardedVideoAdView > rewardedVideoAdVideoComplete")
         
         let placement_id: String = rewardedVideoAd.placementID
         let invalidated: Bool = rewardedVideoAd.isAdValid
@@ -109,7 +109,7 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     
     
     func rewardedVideoAdDidClick(_ rewardedVideoAd: FBRewardedVideoAd) {
-        print("RewardedVideoAdView > rewardedVideoAdDidClick")
+//        print("RewardedVideoAdView > rewardedVideoAdDidClick")
         
         let placement_id: String = rewardedVideoAd.placementID
         let invalidated: Bool = rewardedVideoAd.isAdValid
@@ -121,7 +121,7 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     }
     
     func rewardedVideoAdDidClose(_ rewardedVideoAd: FBRewardedVideoAd) {
-        print("RewardedVideoAdView > rewardedVideoAdDidClose")
+//        print("RewardedVideoAdView > rewardedVideoAdDidClose")
         //Add event for RewardedAd dismissed.
         let placement_id: String = rewardedVideoAd.placementID
         let invalidated: Bool = rewardedVideoAd.isAdValid
@@ -133,11 +133,11 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     }
     
     func rewardedVideoAdWillClose(_ rewardedVideoAd: FBRewardedVideoAd) {
-        print("RewardedAdView > rewardedVideoAdWillClose")
+//        print("RewardedAdView > rewardedVideoAdWillClose")
     }
     
     func rewardedVideoAdDidLoad(_ rewardedVideoAd: FBRewardedVideoAd) {
-        print("RewardedVideoAdView > rewardedVideoAdDidLoad")
+//        print("RewardedVideoAdView > rewardedVideoAdDidLoad")
         
         let placement_id: String = rewardedVideoAd.placementID
         let invalidated: Bool = rewardedVideoAd.isAdValid
@@ -149,8 +149,8 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     }
     
     func rewardedVideoAd(_ rewardedVideoAd: FBRewardedVideoAd, didFailWithError error: Error) {
-        print("RewardedVideoAdView > rewardedVideoAd failed")
-        print(error.localizedDescription)
+//        print("RewardedVideoAdView > rewardedVideoAd failed")
+//        print(error.localizedDescription)
         
         let placement_id: String = rewardedVideoAd.placementID
         let invalidated: Bool = rewardedVideoAd.isAdValid
@@ -162,7 +162,7 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     }
     
     func rewardedVideoAdServerRewardDidFail(_ rewardedVideoAd: FBRewardedVideoAd) {
-        print("RewardedVideoAdView > rewardedVideoAd failed")
+//        print("RewardedVideoAdView > rewardedVideoAd failed")
         
         let placement_id: String = rewardedVideoAd.placementID
         let invalidated: Bool = rewardedVideoAd.isAdValid
@@ -174,7 +174,7 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
     }
     
     func rewardedVideoAdWillLogImpression(_ rewardedVideoAd: FBRewardedVideoAd) {
-        print("RewardedVideoAdView > rewardedVideoAdWillLogImpression")
+//        print("RewardedVideoAdView > rewardedVideoAdWillLogImpression")
         
         let placement_id: String = rewardedVideoAd.placementID
         let invalidated: Bool = rewardedVideoAd.isAdValid

@@ -31,12 +31,11 @@ class FacebookAudienceNetwork {
   /// [testingId] can be obtained by running the app once without the testingId.
   /// Check the log to obtain the [testingId] for your device.
   static Future<bool?> init(
-      {String? testingId, bool iOSAdvertiserTrackingEnabled = false, bool debugLog = false, clearTestDevices = false}) async {
+      {String? testingId, bool iOSAdvertiserTrackingEnabled = false, bool debugLog = false}) async {
     Map<String, String?> initValues = {
       "testingId": testingId,
       "iOSAdvertiserTrackingEnabled": iOSAdvertiserTrackingEnabled.toString(),
       "debugLog": debugLog.toString(),
-      "clearTestDevices": clearTestDevices.toString(),
     };
 
     try {

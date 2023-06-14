@@ -6,7 +6,7 @@ class FANPluginFactory: NSObject {
     let channel: FlutterMethodChannel
     
     init(_channel: FlutterMethodChannel) {
-        print("FANPluginFactory > init")
+//        print("FANPluginFactory > init")
         
         channel = _channel
         
@@ -17,31 +17,28 @@ class FANPluginFactory: NSObject {
             case "init":
                 if #available(iOS 14.0, *) {
                     let iOSAdvertiserTrackingEnabled = ((call.arguments as! Dictionary<String,AnyObject>)["iOSAdvertiserTrackingEnabled"] as! NSString).boolValue
-                    print("FANPluginFactory > iOSAdvertiserTrackingEnabled: " + String(iOSAdvertiserTrackingEnabled))
+//                    print("FANPluginFactory > iOSAdvertiserTrackingEnabled: " + String(iOSAdvertiserTrackingEnabled))
                     FBAdSettings.setAdvertiserTrackingEnabled(iOSAdvertiserTrackingEnabled)
                 }
-                let testingIdString = (call.arguments as! Dictionary<String,AnyObject>)["testingId"] as! String
-                FBAdSettings.addTestDevice(testingIdString)
+                
+                let arguments = call.arguments as! Dictionary<String, Any>
+                let testingIdString = arguments["testingId"] as? String
+                FBAdSettings.addTestDevice(testingIdString ?? "")
 
-                let debugLog = ((call.arguments as! Dictionary<String,AnyObject>)["debugLog"] as! NSString).boolValue
+                let debugLog = (arguments["debugLog"] as? NSString)?.boolValue ?? false
                 if (debugLog) {
                     FBAdSettings.setLogLevel(FBAdLogLevel.verbose)
-                    print("!!!!!FBAdSettings_testDeviceHash:\(FBAdSettings.testDeviceHash())")
-                    print("!!!!!FBAdSettings_FBAdSettings:\(FBAdSettings.isTestMode())")
-                }
-                
-                let clearTestDevices = ((call.arguments as! Dictionary<String,AnyObject>)["clearTestDevices"] as! NSString).boolValue
-                if (clearTestDevices) {
-                    FBAdSettings.clearTestDevices()
+//                    print("!!!!!FBAdSettings_testDeviceHash:\(FBAdSettings.testDeviceHash())")
+//                    print("!!!!!FBAdSettings_FBAdSettings:\(FBAdSettings.isTestMode())")
                 }
 
-                print("FANPluginFactory > init")
+//                print("FANPluginFactory > init")
                 result(true)
             default:
                 result(FlutterMethodNotImplemented)
             }
         }
         
-        print("FacebookAudienceNetworkInterstitialAdPlugin > init > end")
+//        print("FacebookAudienceNetworkInterstitialAdPlugin > init > end")
     }
 }
