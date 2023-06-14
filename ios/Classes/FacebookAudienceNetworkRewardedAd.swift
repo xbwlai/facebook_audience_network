@@ -154,9 +154,11 @@ class FacebookAudienceNetworkRewardedAdPlugin: NSObject, FBRewardedVideoAdDelega
         
         let placement_id: String = rewardedVideoAd.placementID
         let invalidated: Bool = rewardedVideoAd.isAdValid
+        let errorStr: String = error.localizedDescription
         let arg: [String: Any] = [
             FANConstant.PLACEMENT_ID_ARG: placement_id,
             FANConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.ERROR_ARG:errorStr,
         ]
         self.channel.invokeMethod(FANConstant.ERROR_METHOD, arguments: arg)
     }
