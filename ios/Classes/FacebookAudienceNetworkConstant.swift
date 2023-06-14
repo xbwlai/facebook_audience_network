@@ -20,7 +20,8 @@ struct FANConstant{
     static let INVALIDATED_ARG = "invalidated";
     static let CODE_ARG = "code";
     static let ERROR_ARG = "error";
-
+    static let ERROR_MSG = "error_message";
+    
     static let NATIVE_AD_HORIZONTAL = 0;
     static let NATIVE_AD_VERTICAL = 1;
     static let NATIVE_BANNER_AD = 2;

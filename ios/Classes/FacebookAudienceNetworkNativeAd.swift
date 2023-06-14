@@ -597,7 +597,7 @@ class FacebookAudienceNetworkNativeAdView: NSObject, FlutterPlatformView, FBNati
         let arg: [String: Any] = [
             FANConstant.PLACEMENT_ID_ARG: placement_id,
             FANConstant.INVALIDATED_ARG: invalidated,
-            FANConstant.ERROR_ARG:errorStr
+            FANConstant.ERROR_MSG:errorStr
         ]
         self.channel.invokeMethod(FANConstant.ERROR_METHOD, arguments: arg)
     }
