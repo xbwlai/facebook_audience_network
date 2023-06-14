@@ -20,6 +20,21 @@ class FANPluginFactory: NSObject {
                     print("FANPluginFactory > iOSAdvertiserTrackingEnabled: " + String(iOSAdvertiserTrackingEnabled))
                     FBAdSettings.setAdvertiserTrackingEnabled(iOSAdvertiserTrackingEnabled)
                 }
+                let testingIdString = (call.arguments as! Dictionary<String,AnyObject>)["testingId"] as! String
+                FBAdSettings.addTestDevice(testingIdString)
+
+                let debugLog = ((call.arguments as! Dictionary<String,AnyObject>)["debugLog"] as! NSString).boolValue
+                if (debugLog) {
+                    FBAdSettings.setLogLevel(FBAdLogLevel.verbose)
+                    print("!!!!!FBAdSettings_testDeviceHash:\(FBAdSettings.testDeviceHash())")
+                    print("!!!!!FBAdSettings_FBAdSettings:\(FBAdSettings.isTestMode())")
+                }
+                
+                let clearTestDevices = ((call.arguments as! Dictionary<String,AnyObject>)["clearTestDevices"] as! NSString).boolValue
+                if (clearTestDevices) {
+                    FBAdSettings.clearTestDevices()
+                }
+
                 print("FANPluginFactory > init")
                 result(true)
             default:
