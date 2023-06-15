@@ -1,3 +1,7 @@
+## 1.0.2
+- 实现iOS端激励广告
+- 修改iOS端插页广告和激励广告error错误返回key为error_message
+
 ## 1.0.1
 - Support Android V2 embedding - PR by @anil-shrestha
 
